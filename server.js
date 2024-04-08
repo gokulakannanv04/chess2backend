@@ -19,69 +19,69 @@ const PORT = process.env.PORT || 4000;
 // });
 const app = express();
 app.use(express.json());
-// app.use(cors());
-// app.use(bodyParser.json());
-// const User = mongoose.model('User', {
-//   username: String,
-//   password: String,
-//   Registerdate: {
-//     type: Date,
-//     required: true,
-//     default: Date.now,
-//     set: function (value) {
-//       const utcDate = new Date(value);
-//       utcDate.setHours(utcDate.getHours() +6, utcDate.getMinutes() - 30);
-//       return utcDate;
-//     }
-//   }
-// });
-// app.post('/register', async (req, res) => {
-//   try {
-//     const { username, password } = req.body;
+app.use(cors());
+app.use(bodyParser.json());
+const User = mongoose.model('User', {
+  username: String,
+  password: String,
+  Registerdate: {
+    type: Date,
+    required: true,
+    default: Date.now,
+    set: function (value) {
+      const utcDate = new Date(value);
+      utcDate.setHours(utcDate.getHours() +6, utcDate.getMinutes() - 30);
+      return utcDate;
+    }
+  }
+});
+app.post('/register', async (req, res) => {
+  try {
+    const { username, password } = req.body;
 
-//     const existingUser = await User.findOne({ username });
+    const existingUser = await User.findOne({ username });
 
-//     if (existingUser) {
-//       return res.status(400).json({ error: 'Username already registered' });
-//     }
-//     const encrypted = AES.encrypt(password, 'secret-key').toString();
-//     const user = new User({ username, password:encrypted});
-//  await user.save();
+    if (existingUser) {
+      return res.status(400).json({ error: 'Username already registered' });
+    }
+    const encrypted = AES.encrypt(password, 'secret-key').toString();
+    const user = new User({ username, password:encrypted});
+ await user.save();
 
-//     res.status(201).json({ message: 'User registered successfully' });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// });
-// app.post('/login', async (req, res) => {
-//   try {
-//     const { username, password } = req.body;
+    res.status(201).json({ message: 'User registered successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+app.post('/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
 
-//     const user = await User.findOne({ username });
+    const user = await User.findOne({ username });
 
-//     if (user) {
-//       const decrypted = AES.decrypt(user.password, 'secret-key').toString(
-//         CryptoJS.enc.Utf8
-//       );
-//     const passwordMatch =decrypted === password;
-//      if (passwordMatch) {
-//         const { _id, username, password, /* other user details */ } = user;
-//       res.status(200).json({ message: 'Login successful', _id,username,password });
-//       } else {
-//         res.status(401).json({ error: 'Invalid credentials' });
-//         console.log(user.password);
-//       }
-//     } else {
-//       res.status(401).json({ error: 'User not found' });
-//  
-//     }
-//   } catch (error) {
+    if (user) {
+      const decrypted = AES.decrypt(user.password, 'secret-key').toString(
+        CryptoJS.enc.Utf8
+      );
+    const passwordMatch =decrypted === password;
+     if (passwordMatch) {
+        const { _id, username, password, /* other user details */ } = user;
+      res.status(200).json({ message: 'Login successful', _id,username,password });
+      } else {
+        res.status(401).json({ error: 'Invalid credentials' });
+        console.log(user.password);
+      }
+    } else {
+      res.status(401).json({ error: 'User not found' });
+ 
+    }
+  } catch (error) {
 
-//     console.error(error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// });
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 wss.on('connection', (ws) => {
