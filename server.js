@@ -13,10 +13,10 @@ const gameRooms = [];
 // const games = {};
 const PORT = process.env.PORT || 4000;
 // npm i express http mongoose ws crypto-js body-parser cors react react-router-dom
-// mongoose.connect('mongodb+srv://sampledb:sampledb@cluster0.vusts07.mongodb.net/?retryWrites=true&w=majority', {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
+mongoose.connect('mongodb+srv://sampledb:sampledb@cluster0.vusts07.mongodb.net/?retryWrites=true&w=majority', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 const app = express();
 app.use(express.json());
 app.use(cors());
