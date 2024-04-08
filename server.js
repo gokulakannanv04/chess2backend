@@ -6,7 +6,7 @@ const { AES } = require('crypto-js');
 const CryptoJS = require('crypto-js');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { getValidMoves } = require('./getValidMoves');
+const { getValidMoves,startTurn, switchTurn } = require('./getValidMoves');
 // const { Script } = require('vm');
 const gameRooms = [];
 
@@ -120,6 +120,7 @@ if (gameRoom.players.length === 2) {
     player.ws.send(JSON.stringify({ type: 'ready' }));
   });
   initializeGame(gameRoom);
+  startTurn();
 }else {
   // Notify the first player that they are waiting for the second player
   player.ws.send(JSON.stringify({ type: 'waitingForPlayer' }));
@@ -133,6 +134,11 @@ else if (data.type === 'getValidMoves') {
     handleGetValidMoves(ws, data,gameRoom.players); // Pass games as a parameter
  
   }
+else if (data.type === 'dontmove') {
+  
+      switchTurn();
+      
+    }
    else if (data.type === 'move') {
   
     handleMove(ws, data, player.gameRoomId);

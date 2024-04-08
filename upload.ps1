@@ -5,7 +5,11 @@ $scriptDir = $PSScriptRoot
 cd $scriptDir
 
 # Add all changes to the staging area
-git add .
+git add server.js
+git add getValidMoves.js
+git add package.json
+git add package-lock.json
+git add upload.ps1
 # git rm --cached upload.ps1
 # Commit the changes with a commit message
 git commit -m "Automated commit - $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"

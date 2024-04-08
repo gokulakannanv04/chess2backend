@@ -1,5 +1,7 @@
-let currentTurn = 'white'; // Initialize the current turn to white
-
+let currentTurn ; // Initialize the current turn to white
+const startTurn = () => {
+  currentTurn = 'white';
+};
 const switchTurn = () => {
   currentTurn = currentTurn === 'white' ? 'black' : 'white';
 };
@@ -530,4 +532,4 @@ while (isValidPosition(o, p) && (board[o][p] === 'Empty' || board[o][p].charAt(0
   return validMoves;
 };
 
-module.exports = { getValidMoves, switchTurn };
+module.exports = { getValidMoves, switchTurn ,startTurn};
