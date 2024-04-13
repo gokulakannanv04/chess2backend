@@ -6,7 +6,7 @@ const { AES } = require('crypto-js');
 const CryptoJS = require('crypto-js');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { getValidMoves,startTurn, switchTurn } = require('./getValidMoves');
+const { getValidMoves,startTurn,switchTurn} = require('./getValidMoves');
 // const { Script } = require('vm');
 const gameRooms = [];
 
@@ -132,15 +132,11 @@ if (gameRoom.players.length === 2) {
 //   } 
 else if (data.type === 'getValidMoves') {
     handleGetValidMoves(ws, data,gameRoom.players); // Pass games as a parameter
- 
+
   }
-else if (data.type === 'dontmove') {
-  
-      switchTurn();
-      
-    }
+
    else if (data.type === 'move') {
-  
+   switchTurn();
     handleMove(ws, data, player.gameRoomId);
     
   }

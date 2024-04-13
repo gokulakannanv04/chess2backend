@@ -6,6 +6,7 @@ const switchTurn = () => {
   currentTurn = currentTurn === 'white' ? 'black' : 'white';
 };
 
+
 const getValidMoves = (piece, row, col, color, board,currentPlayerColor) => {
   const validMoves = [];
 
@@ -34,7 +35,7 @@ const getValidMoves = (piece, row, col, color, board,currentPlayerColor) => {
         if (isValidPosition(row + 1, col + 1) && board[row + 1][col + 1].charAt(0) === 'w') {
           validMoves.push({ row: row + 1, col: col + 1 });
         }
-        switchTurn(); // Switch turn after a valid move
+         // Switch turn after a valid move
       }
       break;
     case 'wpawn':
@@ -55,7 +56,7 @@ const getValidMoves = (piece, row, col, color, board,currentPlayerColor) => {
         if (isValidPosition(row - 1, col + 1) && board[row - 1][col + 1].charAt(0) === 'b') {
           validMoves.push({ row: row - 1, col: col + 1 });
         }
-        switchTurn(); // Switch turn after a valid move
+         // Switch turn after a valid move
       }
       break;
     case 'wrook':
@@ -105,7 +106,7 @@ const getValidMoves = (piece, row, col, color, board,currentPlayerColor) => {
             break;
           }
         }
-        switchTurn(); // Switch turn after a valid move
+         // Switch turn after a valid move
       }
       break;
     case 'brook':
@@ -155,7 +156,7 @@ const getValidMoves = (piece, row, col, color, board,currentPlayerColor) => {
             break;
           }
         }
-        switchTurn(); // Switch turn after a valid move
+         // Switch turn after a valid move
       }
       break;
     case 'wknight':
@@ -176,7 +177,7 @@ const getValidMoves = (piece, row, col, color, board,currentPlayerColor) => {
             validMoves.push(move);
           }
         });
-        switchTurn(); // Switch turn after a valid move
+         // Switch turn after a valid move
       }
       break;
     case 'bknight':
@@ -197,7 +198,7 @@ const getValidMoves = (piece, row, col, color, board,currentPlayerColor) => {
             validMoves.push(move);
           }
         });
-        switchTurn(); // Switch turn after a valid move
+         // Switch turn after a valid move
       }
       break;
     case 'wbishop':
@@ -245,7 +246,7 @@ const getValidMoves = (piece, row, col, color, board,currentPlayerColor) => {
           i++;
           j++;
         }
-        switchTurn(); // Switch turn after a valid move
+         // Switch turn after a valid move
       }
       break;
     case 'bbishop':
@@ -293,7 +294,7 @@ while (isValidPosition(o, p) && (board[o][p] === 'Empty' || board[o][p].charAt(0
     o++;
     p++;
 }
-        switchTurn(); // Switch turn after a valid move
+         // Switch turn after a valid move
       }
       break;
     case 'wqueen':
@@ -384,7 +385,7 @@ while (isValidPosition(o, p) && (board[o][p] === 'Empty' || board[o][p].charAt(0
           l++;
         }
     
-        switchTurn(); // Switch turn after a valid move
+         // Switch turn after a valid move
       }
       break;
     case 'bqueen':
@@ -475,7 +476,7 @@ while (isValidPosition(o, p) && (board[o][p] === 'Empty' || board[o][p].charAt(0
           n++;
           m++;
       }
-        switchTurn(); // Switch turn after a valid move
+         // Switch turn after a valid move
       }
       break;
     case 'wking':
@@ -499,7 +500,7 @@ while (isValidPosition(o, p) && (board[o][p] === 'Empty' || board[o][p].charAt(0
               validMoves.push({ row: newRow, col: newCol });
             }
           });
-        switchTurn(); // Switch turn after a valid move
+         // Switch turn after a valid move
       }
       break;
     case 'bking':
@@ -522,7 +523,7 @@ while (isValidPosition(o, p) && (board[o][p] === 'Empty' || board[o][p].charAt(0
             validMoves.push({ row: newRow, col: newCol });
           }
         }); 
-        switchTurn(); // Switch turn after a valid move
+         // Switch turn after a valid move
       }
       break;
     default:
@@ -532,4 +533,4 @@ while (isValidPosition(o, p) && (board[o][p] === 'Empty' || board[o][p].charAt(0
   return validMoves;
 };
 
-module.exports = { getValidMoves, switchTurn ,startTurn};
+module.exports = { getValidMoves,startTurn,switchTurn};
