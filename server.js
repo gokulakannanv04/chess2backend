@@ -154,13 +154,15 @@ ws.on('close', () => {
       console.log(gameRoom.players[0].gameId,gameRooms,player.gameRoomId,"gm");
       // if (gameRoom.players.length === 1) {
         let remainingPlayer;
+        let play=player.gameRoomId;
         if(gameRoom.players[0].gameId=== player.gameId){
          remainingPlayer = gameRoom.players[1];}
         else{ remainingPlayer = gameRoom.players[0];}
         if(remainingPlayer!=null){
         remainingPlayer.ws.send(JSON.stringify({ type: 'gameOver', winner: 'You win!' }));
         }
-        delete  gameRooms.find(room => room.id === player.gameRoomId);   removePlayerFromGameRoom(player);
+        removePlayerFromGameRoom(player);
+        delete  gameRooms.find(room => room.id === play);   
         console.log(gameRooms,player.gameRoomId,"dgm");
       // }
     } else {
