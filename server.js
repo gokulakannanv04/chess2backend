@@ -145,7 +145,7 @@ wss.on('connection', (ws) => {
         }
 
         if (remainingPlayer) {
-          remainingPlayer.ws.send(JSON.stringify({ type: 'gameOver', winner: 'You win!' }));
+          remainingPlayer.ws.send(JSON.stringify({ type: 'gameOver', winner: 'Win' }));
         }
 
         removePlayerFromGameRoom(player);
